@@ -1,0 +1,12 @@
+*.out
+unit_tests
+*.log
+#*#
+*~
+.#*
+*ccore.*
+*.a
+*.o
+*.gcno
+*.gcda
+coreware
