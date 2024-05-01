@@ -37,7 +37,7 @@ static parameters_t *init_parameters(void)
 }
 
 static bool get_parameters_data(parameters_t *parameters,
-    char **args, int prog_number, int adress)
+    char **args, int prog_number, int address)
 {
     bool tmp = false;
 
@@ -46,10 +46,10 @@ static bool get_parameters_data(parameters_t *parameters,
     for (size_t i = 0; i < INIT_PARAMS_SIZE; ++i) {
         if (INIT_PARAMS[i].check(&args)) {
             tmp = INIT_PARAMS[i].init(parameters,
-                *args, &prog_number, &adress);
+                *args, &prog_number, &address);
             return (tmp == false) ? false :
                 get_parameters_data(parameters,
-                    args + 1, prog_number, adress);
+                    args + 1, prog_number, address);
         }
     }
     return true;
