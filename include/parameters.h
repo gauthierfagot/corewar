@@ -5,21 +5,21 @@
 ** struct
 */
 
-#ifndef PARAMETERS_STRUCT_H
-    #define PARAMETERS_STRUCT_H
+#pragma once
 
     #include <stddef.h>
+    #include <stdbool.h>
 
 typedef struct champion_s {
     int number;
     int load_adress;
     char *path;
+    int last_alive;
+    bool alive;
 }champion_t;
 
 typedef struct parameters_s {
     int dump;
-    char *arena;
     champion_t **champions;
 }parameters_t;
 
-#endif

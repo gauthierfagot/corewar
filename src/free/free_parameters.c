@@ -12,8 +12,6 @@ void free_parameters(parameters_t *params)
 {
     if (params == NULL)
         return;
-    if (params->arena)
-        free(params->arena);
     if (!params->champions) {
         free(params);
         return;

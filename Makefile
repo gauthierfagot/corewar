@@ -8,17 +8,23 @@
 SRC	=	$(addprefix src/,\
 			main.c	\
 			corewar.c	\
+			init_arena.c	\
 			$(addprefix free/,\
 				free_parameters.c	\
+				free_arena.c	\
 			)	\
 			$(addprefix print/,\
 				print_help.c	\
+				print_arena.c	\
 			)	\
 			$(addprefix parameters/,\
 				check_flag.c	\
 				get_parameter.c	\
 				init_parameter.c	\
 				set_numbers.c	\
+			)	\
+			$(addprefix heads_utils/,\
+				push_to_heads.c	\
 			)	\
 		)	\
 

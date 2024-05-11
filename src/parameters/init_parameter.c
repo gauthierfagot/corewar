@@ -82,5 +82,9 @@ bool set_path(parameters_t *parameters, char *path, int *prog, int *load)
         return false;
     parameters->champions[len] = new;
     parameters->champions[len + 1] = NULL;
+    parameters->champions[len]->last_alive = 0;
+    parameters->champions[len]->alive = true;
+    *load = -1;
+    *prog = -1;
     return true;
 }

@@ -5,12 +5,10 @@
 ** macros
 */
 
-#ifndef MACROS
-    #define MACROS
+#pragma once
 
 static const int SUCCESS = 0;
 static const int ERROR = 84;
 
 static char const HELP_FILE[] = "./assets/help.txt";
 
-#endif

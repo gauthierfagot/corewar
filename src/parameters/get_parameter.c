@@ -18,17 +18,9 @@ static parameters_t *init_parameters(void)
 
     if (new == NULL)
         return NULL;
-    new->arena = malloc(sizeof(char) * MEM_SIZE);
-    if (new->arena == NULL) {
-        free(new);
-        return NULL;
-    }
-    for (int i = 0; i < MEM_SIZE; ++i)
-        new->arena[i] = 0;
     new->dump = -1;
     new->champions = malloc(sizeof(champion_t *));
     if (new->champions == NULL) {
-        free(new->arena);
         free(new);
         return NULL;
     }

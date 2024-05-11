@@ -5,8 +5,7 @@
 ** lib
 */
 
-#ifndef LIB_
-    #define LIB_
+#pragma once
 
     #include <stdbool.h>
 
@@ -24,5 +23,3 @@ bool is_number(char *);
 bool is_alpha(char *);
 int str_to_int(char *);
 char *get_buffer(char const *const path);
-
-#endif /* !LIB_ */

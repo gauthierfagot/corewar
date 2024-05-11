@@ -5,8 +5,7 @@
 ** get parameters
 */
 
-#ifndef PARAMETERS_INIT_H
-    #define PARAMETERS_INIT_H
+#pragma once
 
     #include <stdbool.h>
     #include "parameters.h"
@@ -36,4 +35,3 @@ static const init_params_t INIT_PARAMS[] = {
 static const size_t INIT_PARAMS_SIZE =
 sizeof(INIT_PARAMS) / sizeof(init_params_t);
 
-#endif
