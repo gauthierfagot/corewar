@@ -9,6 +9,7 @@
 
     #include <stddef.h>
     #include <stdbool.h>
+    #include "op.h"
 
 typedef struct champion_s {
     int number;
@@ -21,4 +22,5 @@ typedef struct champion_s {
 typedef struct parameters_s {
     int dump;
     champion_t **champions;
+    int registers[REG_NUMBER];
 }parameters_t;

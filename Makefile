@@ -30,36 +30,6 @@ SRC	=	$(addprefix src/,\
 				set_numbers.c	\
 				init_arena.c	\
 			)	\
-			$(addprefix instructions/,\
-				live.c	\
-			)	\
-		)	\
-
-SRC	=	$(addprefix src/,\
-			main.c	\
-			corewar.c	\
-			conv_coding_byte.c	\
-			$(addprefix free/,\
-				free_parameters.c	\
-				free_arena.c	\
-			)	\
-			$(addprefix print/,\
-				print_help.c	\
-				print_arena.c	\
-			)	\
-			$(addprefix parameters/,\
-				check_flag.c	\
-				get_parameter.c	\
-			)	\
-			$(addprefix heads_utils/,\
-				push_to_heads.c	\
-			)	\
-			$(addprefix init/,\
-				init_champions_address.c	\
-				init_parameter.c	\
-				set_numbers.c	\
-				init_arena.c	\
-			)	\
 			$(addprefix cycle/,\
 				fight.c	\
 				wait.c	\

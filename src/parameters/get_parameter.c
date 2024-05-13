@@ -25,6 +25,8 @@ static parameters_t *init_parameters(void)
         return NULL;
     }
     new->champions[0] = NULL;
+    for (int i = 0; i < REG_NUMBER; ++i)
+        new->registers[i] = 0;
     return new;
 }
 

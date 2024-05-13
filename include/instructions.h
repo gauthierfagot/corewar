@@ -10,6 +10,8 @@
 #include "arena.h"
 #include "parameters.h"
 
+#define ASCII_SIZE 256
+
 void instruction_alive(head_t *, char *, parameters_t *);
 void instruction_load(head_t *, char *, parameters_t *);
 void instruction_st(head_t *, char *, parameters_t *);
