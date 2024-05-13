@@ -35,6 +35,21 @@ static bool is_head_alive(parameters_t *parameters, head_t *head)
     return false;
 }
 
+static bool handle_wait(parameters_t *parameters, char *arena, head_t **heads)
+{
+    if ((*heads)->wait_cycle > 0) {
+        (*heads)->wait_cycle -= 1;
+        start_fight(parameters, arena, &(*heads)->next);
+        return true;
+    } else if ((*heads)->wait_cycle == 0) {
+        (*heads)->instruction(*heads, arena, parameters);
+        (*heads)->wait_cycle -= 1;
+        start_fight(parameters, arena, &(*heads)->next);
+        return true;
+    }
+    return false;
+}
+
 static void start_fight(parameters_t *parameters, char *arena, head_t **heads)
 {
     if (*heads == NULL)
@@ -44,16 +59,18 @@ static void start_fight(parameters_t *parameters, char *arena, head_t **heads)
         start_fight(parameters, arena, heads);
         return;
     }
-    for (int i = 1; i < NB_OF_INSTRUCTIONS + 1; i++) {
+    if (handle_wait(parameters, arena, heads))
+        return;
+    for (int i = 1; i <= NB_OF_INSTRUCTIONS + 1; i++) {
         if (arena[(*heads)->index] == i) {
-            INSTRUCTIONS[i](*heads, arena, parameters);
+            (*heads)->wait_cycle = op_tab[i - 1].nbr_cycles;
+            (*heads)->instruction = INSTRUCTIONS[i];
             start_fight(parameters, arena, &(*heads)->next);
             return;
         }
     }
     remove_head(heads);
     start_fight(parameters, arena, heads);
-    return;
 }
 
 static int count_alive_champs(parameters_t *parameters)
