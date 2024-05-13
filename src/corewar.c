@@ -86,6 +86,7 @@ int corewar(char **argv)
 
     if (parameters == NULL)
         return ERROR;
+    init_champion_address(parameters);
     if (!launch_arena(parameters))
         return ERROR;
     return SUCCESS;

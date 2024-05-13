@@ -44,9 +44,10 @@ static bool extract_header(head_t *tmp, FILE **file)
     return true;
 }
 
-static bool print_program_in_arena(char *arena, champion_t *champion, head_t **heads)
+static bool print_program_in_arena(char *arena, champion_t *champion,
+    head_t **heads)
 {
-    int adress = champion->load_adress;
+    int address = champion->load_address;
     FILE *file = fopen(champion->path, "r");
     head_t *tmp = malloc(sizeof(head_t));
 
@@ -58,9 +59,9 @@ static bool print_program_in_arena(char *arena, champion_t *champion, head_t **h
     if (!extract_header(tmp, &file))
         return false;
     for (int i = 0;
-        fread(arena + ((adress + i) % MEM_SIZE), 1, 1, file) > 0; ++i);
+        fread(arena + ((address + i) % MEM_SIZE), 1, 1, file) > 0; ++i);
     fclose(file);
-    tmp->index = adress;
+    tmp->index = address;
     tmp->number = champion->number;
     tmp->wait_cycle = 0;
     push_front_head(heads, tmp);

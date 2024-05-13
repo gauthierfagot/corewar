@@ -12,7 +12,7 @@
 
 typedef struct champion_s {
     int number;
-    int load_adress;
+    int load_address;
     char *path;
     int last_alive;
     bool alive;
@@ -22,4 +22,3 @@ typedef struct parameters_s {
     int dump;
     champion_t **champions;
 }parameters_t;
-

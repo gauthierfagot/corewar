@@ -20,6 +20,7 @@ parameters_t *get_parameters(char **argv);
 void free_parameters(parameters_t *params);
 void free_arena(arena_t *arena);
 bool set_champions_numbers(champion_t **champions);
+void init_champion_address(parameters_t *parameters);
 
 arena_t *init_arena(parameters_t *);
 void print_arena(arena_t *);

@@ -34,4 +34,3 @@ static const init_params_t INIT_PARAMS[] = {
 
 static const size_t INIT_PARAMS_SIZE =
 sizeof(INIT_PARAMS) / sizeof(init_params_t);
-

@@ -73,7 +73,7 @@ bool set_path(parameters_t *parameters, char *path, int *prog, int *load)
 
     if (new == NULL)
         return false;
-    new->load_adress = *load;
+    new->load_address = *load;
     new->number = *prog;
     new->path = my_strdup(path);
     parameters->champions = realloc(parameters->champions,
