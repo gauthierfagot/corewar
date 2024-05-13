@@ -63,7 +63,7 @@ static bool print_program_in_arena(char *arena, champion_t *champion,
     fclose(file);
     tmp->index = address;
     tmp->number = champion->number;
-    tmp->wait_cycle = 0;
+    tmp->wait_cycle = -1;
     push_front_head(heads, tmp);
     return true;
 }

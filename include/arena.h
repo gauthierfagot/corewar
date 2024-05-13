@@ -15,7 +15,7 @@ typedef struct head_s {
     int number;
     char name[PROG_NAME_LENGTH + 1];
     int index;
-    size_t wait_cycle;
+    int wait_cycle;
     void (*instruction)(struct head_s *, char *, parameters_t *);
     struct head_s *next;
 }head_t;

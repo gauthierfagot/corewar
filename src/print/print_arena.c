@@ -51,4 +51,5 @@ void print_arena(arena_t *arena)
         }
         my_putstr(" ");
     }
+    my_putchar('\n');
 }

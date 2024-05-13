@@ -29,14 +29,16 @@ SRC	=	$(addprefix src/,\
 			$(addprefix init/,\
 				init_champions_address.c	\
 			)	\
+			$(addprefix cycle/,\
+				fight.c	\
+				wait.c	\
+			)	\
 			$(addprefix instructions/,\
 				live.c	\
 				add.c	\
 				aff.c	\
 				and.c	\
 				fork.c	\
-				ldi.c	\
-				lfork.c	\
 				ldi.c	\
 				lfork.c	\
 				lld.c	\
@@ -50,6 +52,7 @@ SRC	=	$(addprefix src/,\
 				zjmp.c	\
 			)	\
 		)	\
+		op/op.c	\
 
 SRC_TEST	=
 
