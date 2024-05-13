@@ -28,3 +28,5 @@ void print_arena(arena_t *);
 void push_front_head(head_t **list, head_t *to_push);
 bool handle_wait(parameters_t *parameters, char *arena, head_t **heads);
 void start_fight(parameters_t *parameters, char *arena, head_t **heads);
+
+char *dec_to_bin(int nb);
