@@ -31,6 +31,23 @@ SRC	=	$(addprefix src/,\
 			)	\
 			$(addprefix instructions/,\
 				live.c	\
+				add.c	\
+				aff.c	\
+				and.c	\
+				fork.c	\
+				ldi.c	\
+				lfork.c	\
+				ldi.c	\
+				lfork.c	\
+				lld.c	\
+				lldi.c	\
+				load.c	\
+				or.c	\
+				st.c	\
+				sti.c	\
+				sub.c	\
+				xor.c	\
+				zjmp.c	\
 			)	\
 		)	\
 
