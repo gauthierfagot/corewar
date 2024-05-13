@@ -13,6 +13,7 @@
 #include "arena.h"
 #include "op.h"
 #include "instructions.h"
+#include "mini_printf.h"
 
 static void remove_head(head_t **heads)
 {
@@ -72,9 +73,13 @@ static bool launch_arena(parameters_t *parameters)
 
     if (arena == NULL)
         return false;
+    print_arena(arena);
     for (int i = 0; count_alive_champs(parameters) > 1; i++) {
         start_fight(parameters, arena->arena, arena->heads);
     }
+    if (*arena->heads != NULL)
+        mini_printf("The player %d (%s) has won.\n",
+            (*arena->heads)->number, (*arena->heads)->name);
     free_arena(arena);
     free_parameters(parameters);
     return true;

@@ -29,6 +29,9 @@ SRC	=	$(addprefix src/,\
 			$(addprefix init/,\
 				init_champions_address.c	\
 			)	\
+			$(addprefix instructions/,\
+				live.c	\
+			)	\
 		)	\
 
 SRC_TEST	=
