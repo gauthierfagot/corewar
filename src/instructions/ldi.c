@@ -41,16 +41,18 @@ void instruction_ldi(head_t *head, char *arena, parameters_t *)
     extract_arguments_size(3, arena, head, args);
     if (args[0] == 0 || args[1] == 0 ||
         args[1] == 4 || args[2] != 1) {
+        args[0] = (args[0] == 4) ? 2 : args[0];
+        args[1] = (args[1] == 4) ? 2 : args[1];
         head->carry = false;
-        head->index = (head->index + 2 + args[0] + args[1] + args[2]) %
-            MEM_SIZE;
     } else {
+        args[0] = (args[0] == 4) ? 2 : args[0];
+        args[1] = (args[1] == 4) ? 2 : args[1];
         if (!load_index(head, arena, args)) {
             head->carry = false;
         } else {
             head->carry = true;
-            head->index = (head->index + 2 + args[0] + args[1] + args[2]) %
-                MEM_SIZE;
         }
     }
+    head->index = (head->index + 2 + args[0] + args[1] + args[2]) %
+        MEM_SIZE;
 }

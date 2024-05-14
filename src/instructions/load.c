@@ -10,40 +10,39 @@
 #include "mini_printf.h"
 #include "functions.h"
 
-static void put_dir_in_reg(head_t *head, char *arena)
+static bool put_dir_in_reg(head_t *head, char *arena)
 {
     unsigned char reg = 0;
     int direct = 0;
-    int value = 0;
 
-    extract_data_arena(arena, head->index + 2, 1, (char *)&reg);
+    extract_data_arena(arena, head->index + 2, 4, (char *)&direct);
+    extract_data_arena(arena,
+        (head->index + 6) % MEM_SIZE, 1, (char *)&reg);
     if (reg == 0 || reg > REG_NUMBER) {
         head->carry = false;
-        return;
+        return false;
     }
-    extract_data_arena(arena,
-        (head->index + 3) % MEM_SIZE, 4, (char *)&direct);
-    extract_data_arena(arena,
-        (head->index + direct) % MEM_SIZE, REG_SIZE, (char *)&value);
-    head->registers[reg - 1] = value;
+    head->registers[reg - 1] = direct;
+    return true;
 }
 
-static void put_indir_in_reg(head_t *head, char *arena)
+static bool put_indir_in_reg(head_t *head, char *arena)
 {
     unsigned char reg = 0;
     __int16_t indirect = 0;
     int value = 0;
 
-    extract_data_arena(arena, head->index + 2, 1, (char *)&reg);
-    if (reg == 0 || reg >= REG_NUMBER) {
+    extract_data_arena(arena, head->index + 2, 2, (char *)&indirect);
+    extract_data_arena(arena,
+        (head->index + 4) % MEM_SIZE, 1, (char *)&reg);
+    if (reg == 0 || reg > REG_NUMBER) {
         head->carry = false;
-        return;
+        return false;
     }
-    extract_data_arena(arena,
-        (head->index + 3) % MEM_SIZE, 2, (char *)&indirect);
-    extract_data_arena(arena,
-        head->index + indirect % IDX_MOD, REG_SIZE, (char *)&value);
+    extract_data_arena(arena, (head->index + indirect % IDX_MOD) %
+        MEM_SIZE, REG_SIZE, (char *)&value);
     head->registers[reg - 1] = value;
+    return true;
 }
 
 void instruction_load(head_t *head, char *arena, parameters_t *)
@@ -53,12 +52,17 @@ void instruction_load(head_t *head, char *arena, parameters_t *)
     int tmp = 0;
 
     if (search_byte_size(binary_code, &tmp) == DIR_SIZE_FILE) {
-        put_dir_in_reg(head, arena);
+        if (!put_dir_in_reg(head, arena))
+            head->carry = false;
+        else
+            head->carry = true;
         head->index = (head->index + 7) % MEM_SIZE;
     } else {
-        put_indir_in_reg(head, arena);
+        if (!put_indir_in_reg(head, arena))
+            head->carry = false;
+        else
+            head->carry = true;
         head->index = (head->index + 5) % MEM_SIZE;
     }
-    head->carry = true;
     free(binary_code);
 }

@@ -27,13 +27,11 @@ static bool store_index(head_t *head, char *arena, int *args)
     int second = 0;
     int third = 0;
 
-    printf ("%d %d %d\n", args[0], args[1], args[2]);
     extract_data_arena(arena, head->index + 2, args[0], (char *)&first);
     extract_data_arena(arena, head->index + 2 + args[0], args[1],
         (char *)&second);
     extract_data_arena(arena,
         head->index + 2 + args[0] + args[1], args[2], (char *)&third);
-    printf("%d %d\n", args[2], third);
     if (!check_registers(first, second, third, args))
         return false;
     first = head->registers[first - 1]; 
