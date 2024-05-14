@@ -9,7 +9,7 @@
 #include "parameters.h"
 #include "mini_printf.h"
 
-void instruction_add(head_t *head, char *arena, parameters_t *parameters)
+void instruction_add(head_t *head, char *arena, parameters_t *)
 {
     unsigned char first = arena[head->index + 2];
     unsigned char second = arena[head->index + 3];
@@ -18,11 +18,11 @@ void instruction_add(head_t *head, char *arena, parameters_t *parameters)
     if ((first == 0 || second == 0 || result == 0) ||
         first >= REG_NUMBER || second >= REG_NUMBER || result >= REG_NUMBER) {
         head->carry = false;
-        head->index == (head->index + 5) % MEM_SIZE;
+        head->index = (head->index + 5) % MEM_SIZE;
         return;
     }
     head->carry = true;
     head->registers[result] =
         head->registers[first] + head->registers[second];
-    head->index == (head->index + 5) % MEM_SIZE;
+    head->index = (head->index + 5) % MEM_SIZE;
 }

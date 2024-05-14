@@ -48,4 +48,5 @@ static void (*INSTRUCTIONS[])(head_t *, char *, parameters_t *) = {
     instruction_aff,
 };
 
-static const int NB_OF_INSTRUCTIONS = sizeof(INSTRUCTIONS) / sizeof(void *);
+static const unsigned char NB_OF_INSTRUCTIONS =
+sizeof(INSTRUCTIONS) / sizeof(void *);
