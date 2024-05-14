@@ -15,7 +15,7 @@ void instruction_sub(head_t *head, char *arena, parameters_t *)
     unsigned char second = arena[head->index + 3];
     unsigned char result = arena[head->index + 4];
 
-if ((first == 0 || second == 0 || result == 0) ||
+    if ((first == 0 || second == 0 || result == 0) ||
         first > REG_NUMBER || second > REG_NUMBER || result > REG_NUMBER) {
         head->carry = false;
         head->index = (head->index + 5) % MEM_SIZE;
