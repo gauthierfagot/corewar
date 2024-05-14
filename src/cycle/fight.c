@@ -24,12 +24,12 @@ static bool is_head_alive(parameters_t *parameters, head_t *head)
 {
     for (int i = 0; parameters->champions[i] != NULL; ++i) {
         if (parameters->champions[i]->number == head->number &&
-            parameters->champions[i]->last_alive > CYCLE_TO_DIE) {
+            parameters->champions[i]->last_alive > parameters->cycles) {
             parameters->champions[i]->alive = false;
-            return true;
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 void start_fight(parameters_t *parameters, char *arena, head_t **heads)
@@ -51,6 +51,6 @@ void start_fight(parameters_t *parameters, char *arena, head_t **heads)
             return;
         }
     }
-    remove_head(heads);
+    (*heads)->index == ((*heads)->index + 1) % MEM_SIZE;
     start_fight(parameters, arena, heads);
 }

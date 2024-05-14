@@ -44,6 +44,15 @@ static bool extract_header(head_t *tmp, FILE **file)
     return true;
 }
 
+static void init_base_infos(head_t *tmp, int address, champion_t *champion)
+{
+    tmp->index = address;
+    tmp->number = champion->number;
+    tmp->wait_cycle = -1;
+    for (int i = 0; i < REG_NUMBER; ++i)
+        tmp->registers[i] = 0;
+}
+
 static bool print_program_in_arena(char *arena, champion_t *champion,
     head_t **heads)
 {
@@ -61,9 +70,7 @@ static bool print_program_in_arena(char *arena, champion_t *champion,
     for (int i = 0;
         fread(arena + ((address + i) % MEM_SIZE), 1, 1, file) > 0; ++i);
     fclose(file);
-    tmp->index = address;
-    tmp->number = champion->number;
-    tmp->wait_cycle = 0;
+    init_base_infos(tmp, address, champion);
     push_front_head(heads, tmp);
     return true;
 }

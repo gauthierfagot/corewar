@@ -36,6 +36,19 @@ char *dec_to_bin(int nb)
     return bin;
 }
 
+void extract_data_arena(char *arena, int index, int byte_size, char *result)
+{
+    int tmp_size = byte_size - 1;
+
+    if (byte_size > 4 || index + byte_size >= MEM_SIZE)
+        return;
+    for (int i = 0; i < byte_size; ++i) {
+        result[tmp_size] = arena[index];
+        ++index;
+        --tmp_size;
+    }
+}
+
 int search_byte_size(char *coding_byte, int *index)
 {
     if (my_strlen(coding_byte) != (MAX_ARGS_NUMBER * 2) ||

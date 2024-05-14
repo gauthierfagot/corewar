@@ -8,6 +8,7 @@
 #pragma once
 
 #include <stddef.h>
+#include <stdbool.h>
 #include "op.h"
 #include "parameters.h"
 
@@ -21,6 +22,8 @@ typedef struct head_s {
     int index;
     int wait_cycle;
     void (*instruction)(struct head_s *, char *, parameters_t *);
+    bool carry;
+    int registers[REG_NUMBER];
     struct head_s *next;
 }head_t;
 

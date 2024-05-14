@@ -21,5 +21,7 @@ typedef struct champion_s {
 
 typedef struct parameters_s {
     int dump;
+    int cycles;
+    int live_counter;
     champion_t **champions;
 }parameters_t;

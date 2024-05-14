@@ -66,6 +66,13 @@ static size_t champions_len(champion_t **champions)
     return len;
 }
 
+static void init_base_data(parameters_t *parameters, size_t len)
+{
+    parameters->champions[len + 1] = NULL;
+    parameters->champions[len]->last_alive = 0;
+    parameters->champions[len]->alive = true;
+}
+
 bool set_path(parameters_t *parameters, char *path, int *prog, int *load)
 {
     champion_t *new = malloc(sizeof(champion_t));
@@ -81,9 +88,7 @@ bool set_path(parameters_t *parameters, char *path, int *prog, int *load)
     if (parameters->champions == NULL)
         return false;
     parameters->champions[len] = new;
-    parameters->champions[len + 1] = NULL;
-    parameters->champions[len]->last_alive = 0;
-    parameters->champions[len]->alive = true;
+    init_base_data(parameters, len);
     *load = -1;
     *prog = -1;
     return true;
