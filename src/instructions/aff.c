@@ -15,10 +15,9 @@ void instruction_aff(head_t *head, char *arena, parameters_t *)
 {
     unsigned char reg = 0;
 
-    ++head->index;
-    extract_data_arena(arena, head->index, REG_SIZE_FILE, (char *)&reg);
+    extract_data_arena(arena, head->index + 2, REG_SIZE_FILE, (char *)&reg);
     if (reg == 0 || reg > REG_NUMBER)
         return;
-    mini_printf("%d\n", head->registers[reg - 1] % ASCII_SIZE);
-    head->index = (head->index + REG_SIZE_FILE) % MEM_SIZE;
+    mini_printf("%c\n", (head->registers[reg - 1] % ASCII_SIZE) + '0');
+    head->index = (head->index + REG_SIZE_FILE + 2) % MEM_SIZE;
 }
