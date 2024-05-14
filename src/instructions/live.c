@@ -20,7 +20,8 @@ void instruction_alive(head_t *head, char *arena, parameters_t *parameters)
     for (int i = 0; parameters->champions[i] != NULL; ++i) {
         if (parameters->champions[i]->number == direct) {
             mini_printf("The player %d (%s) is alive.\n",
-                parameters->champions[i]->number, parameters->champions[i]->name);
+                parameters->champions[i]->number,
+                parameters->champions[i]->name);
             parameters->champions[i]->last_alive = 0;
         }
     }

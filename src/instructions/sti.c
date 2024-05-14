@@ -10,7 +10,8 @@
 #include "mini_printf.h"
 #include "functions.h"
 
-static bool check_registers(unsigned char first, int second, int third, int *args)
+static bool check_registers(unsigned char first,
+    int second, int third, int *args)
 {
     if (first == 0 || first > REG_NUMBER)
         return false;
@@ -34,7 +35,7 @@ static bool store_index(head_t *head, char *arena, int *args)
         head->index + 2 + args[0] + args[1], args[2], (char *)&third);
     if (!check_registers(first, second, third, args))
         return false;
-    first = head->registers[first - 1]; 
+    first = head->registers[first - 1];
     second = (args[1] == 1) ? head->registers[second - 1] : second;
     third = (args[2] == 1) ? head->registers[third - 1] : third;
     print_n_bytes_in_arena(arena, (head->index +

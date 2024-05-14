@@ -35,7 +35,7 @@ static void print_value(head_t *head, char *arena)
 }
 
 void instruction_st(head_t *head, char *arena, parameters_t *)
-{   
+{
     unsigned char coding_byte = arena[head->index + 1];
     char *binary_code = dec_to_bin(coding_byte);
     int tmp = 0;
