@@ -30,7 +30,7 @@ static void print_value(head_t *head, char *arena)
     if (first == 0 || first >= REG_NUMBER)
         return;
     extract_data_arena(arena, head->index + 3, 4, (char *)&direct);
-    print_n_bytes_in_arena(arena, (head->index + direct) % IDX_MOD, 4,
+    print_n_bytes_in_arena(arena, head->index + direct % IDX_MOD, 4,
         (char *)&head->registers[first]);
 }
 

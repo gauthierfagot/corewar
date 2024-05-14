@@ -26,6 +26,7 @@ arena_t *init_arena(parameters_t *);
 void print_arena(arena_t *);
 
 void push_front_head(head_t **list, head_t *to_push);
+void push_index_head(head_t *head, head_t *to_push);
 bool handle_wait(parameters_t *parameters, char *arena, head_t **heads);
 void start_fight(parameters_t *parameters, char *arena, head_t **heads);
 

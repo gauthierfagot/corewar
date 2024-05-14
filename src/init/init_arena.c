@@ -51,6 +51,7 @@ static void init_base_infos(head_t *tmp, int address, champion_t *champion)
     tmp->wait_cycle = -1;
     for (int i = 0; i < REG_NUMBER; ++i)
         tmp->registers[i] = 0;
+    tmp->carry = true;
 }
 
 static bool print_program_in_arena(char *arena, champion_t *champion,

@@ -12,3 +12,9 @@ void push_front_head(head_t **list, head_t *to_push)
     to_push->next = *list;
     *list = to_push;
 }
+
+void push_index_head(head_t *head, head_t *to_push)
+{
+    to_push->next = head->next;
+    head->next = to_push;
+}
