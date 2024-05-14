@@ -38,20 +38,32 @@ static void update_lives(parameters_t *parameters)
     }
 }
 
+static void print_won(head_t *winner, parameters_t *parameters)
+{
+    for (int i = 0; parameters->champions[i] != NULL; ++i) {
+        if (parameters->champions[i]->number == winner->number) {
+            mini_printf("The player %d (%s) has won.\n",
+                parameters->champions[i]->number,
+                parameters->champions[i]->name);
+        }
+    }
+}
+
 static bool launch_arena(parameters_t *parameters)
 {
     arena_t *arena = init_arena(parameters);
 
     if (arena == NULL)
         return false;
-    print_arena(arena);
     for (int i = 0; count_alive_champs(parameters) > 1; i++) {
+        if (parameters->dump == i) {
+            print_arena(arena);
+        }
         start_fight(parameters, arena->arena, arena->heads);
         update_lives(parameters);
     }
     if (*arena->heads != NULL)
-        mini_printf("The player %d (%s) has won.\n",
-            (*arena->heads)->number, (*arena->heads)->name);
+        print_won(*arena->heads, parameters);
     else
         mini_printf("Everybody is dead... :(\n");
     free_arena(arena);
