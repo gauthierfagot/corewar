@@ -35,3 +35,5 @@ int search_byte_size(char *coding_byte, int *index);
 void extract_data_arena(char *arena, int index, int byte_size, char *result);
 void print_n_bytes_in_arena(char *arena, int index,
     int byte_size, char *to_print);
+void extract_arguments_size(int nb_of_args,
+    char *arena, head_t *head, int *args);

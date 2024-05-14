@@ -13,6 +13,7 @@
 
 typedef struct champion_s {
     int number;
+    char name[PROG_NAME_LENGTH + 1];
     int load_address;
     char *path;
     int last_alive;

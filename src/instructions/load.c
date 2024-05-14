@@ -17,7 +17,7 @@ static void put_dir_in_reg(head_t *head, char *arena)
     int value = 0;
 
     extract_data_arena(arena, head->index + 2, 1, (char *)&reg);
-    if (reg == 0 || reg >= REG_NUMBER) {
+    if (reg == 0 || reg > REG_NUMBER) {
         head->carry = false;
         return;
     }
@@ -57,7 +57,7 @@ void instruction_load(head_t *head, char *arena, parameters_t *)
         head->index = (head->index + 7) % MEM_SIZE;
     } else {
         put_indir_in_reg(head, arena);
-        head->index = (head->index + 4) % MEM_SIZE;
+        head->index = (head->index + 5) % MEM_SIZE;
     }
     head->carry = true;
     free(binary_code);

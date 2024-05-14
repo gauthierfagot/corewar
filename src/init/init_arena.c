@@ -25,7 +25,7 @@ static uint32_t reverse_hex_32(uint32_t nb)
     return result;
 }
 
-static bool extract_header(head_t *tmp, FILE **file)
+static bool extract_header(FILE **file, champion_t *champion)
 {
     int magic = 0;
 
@@ -35,7 +35,7 @@ static bool extract_header(head_t *tmp, FILE **file)
         my_puterr("wrong binary error\n");
         return false;
     }
-    fread(tmp->name, PROG_NAME_LENGTH + 1, 1, *file);
+    fread(champion->name, PROG_NAME_LENGTH + 1, 1, *file);
     fseek(*file, 0, SEEK_SET);
     if (fseek(*file, sizeof(header_t), SEEK_CUR) == -1) {
         fclose(*file);
@@ -51,6 +51,7 @@ static void init_base_infos(head_t *tmp, int address, champion_t *champion)
     tmp->wait_cycle = -1;
     for (int i = 0; i < REG_NUMBER; ++i)
         tmp->registers[i] = 0;
+    tmp->registers[0] = champion->number;
     tmp->carry = true;
 }
 
@@ -66,7 +67,7 @@ static bool print_program_in_arena(char *arena, champion_t *champion,
         my_puterr(": no such file or directory.\n");
         return false;
     }
-    if (!extract_header(tmp, &file))
+    if (!extract_header(&file, champion))
         return false;
     for (int i = 0;
         fread(arena + ((address + i) % MEM_SIZE), 1, 1, file) > 0; ++i);

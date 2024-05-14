@@ -17,9 +17,9 @@ static void store_register(head_t *head, char *arena)
     unsigned char second = arena[head->index + 3];
 
     if ((first == 0 || second == 0) ||
-        first >= REG_NUMBER || second >= REG_NUMBER)
+        first > REG_NUMBER || second > REG_NUMBER)
         return;
-    head->registers[second] = head->registers[first];
+    head->registers[second - 1] = head->registers[first - 1];
 }
 
 static void print_value(head_t *head, char *arena)
@@ -27,11 +27,11 @@ static void print_value(head_t *head, char *arena)
     int direct = 0;
     unsigned char first = arena[(head->index + 2) % MEM_SIZE];
 
-    if (first == 0 || first >= REG_NUMBER)
+    if (first == 0 || first > REG_NUMBER)
         return;
     extract_data_arena(arena, head->index + 3, 4, (char *)&direct);
     print_n_bytes_in_arena(arena, head->index + direct % IDX_MOD, 4,
-        (char *)&head->registers[first]);
+        (char *)&head->registers[first - 1]);
 }
 
 void instruction_st(head_t *head, char *arena, parameters_t *)

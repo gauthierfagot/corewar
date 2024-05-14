@@ -17,8 +17,6 @@ static head_t *duplicate_head(head_t *head)
     new->carry = head->carry;
     new->index = head->index;
     new->instruction = NULL;
-    for (int i = 0; i < PROG_NAME_LENGTH; ++i)
-        new->name[i] = head->name[i];
     new->next = NULL;
     new->number = head->number;
     for (int i = 0; i < REG_NUMBER; ++i)
@@ -27,7 +25,7 @@ static head_t *duplicate_head(head_t *head)
     return new;
 }
 
-void instruction_fork(head_t *head, char *arena, parameters_t *parameters)
+void instruction_fork(head_t *head, char *arena, parameters_t *)
 {
     __int16_t direct = 0;
     head_t *duplicate = duplicate_head(head);
