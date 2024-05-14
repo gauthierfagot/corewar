@@ -43,7 +43,7 @@ void start_fight(parameters_t *parameters, char *arena, head_t **heads)
     }
     if (handle_wait(parameters, arena, heads))
         return;
-    for (int i = 1; i <= NB_OF_INSTRUCTIONS + 1; i++) {
+    for (unsigned char i = 1; i <= NB_OF_INSTRUCTIONS + 1; i++) {
         if (arena[(*heads)->index] == i) {
             (*heads)->wait_cycle = op_tab[i - 1].nbr_cycles;
             (*heads)->instruction = INSTRUCTIONS[i];
@@ -51,6 +51,6 @@ void start_fight(parameters_t *parameters, char *arena, head_t **heads)
             return;
         }
     }
-    (*heads)->index == ((*heads)->index + 1) % MEM_SIZE;
-    start_fight(parameters, arena, heads);
+    (*heads)->index = ((*heads)->index + 1) % MEM_SIZE;
+    start_fight(parameters, arena, &(*heads)->next);
 }

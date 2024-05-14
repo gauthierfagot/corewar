@@ -36,6 +36,14 @@ char *dec_to_bin(int nb)
     return bin;
 }
 
+void print_n_bytes_in_arena(char *arena, int index,
+    int byte_size, char *to_print)
+{
+    for (int i = 0; i < byte_size; i++) {
+        arena[(index + i) % MEM_SIZE] = to_print[i];
+    }
+}
+
 void extract_data_arena(char *arena, int index, int byte_size, char *result)
 {
     int tmp_size = byte_size - 1;

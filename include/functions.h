@@ -32,3 +32,5 @@ void start_fight(parameters_t *parameters, char *arena, head_t **heads);
 char *dec_to_bin(int nb);
 int search_byte_size(char *coding_byte, int *index);
 void extract_data_arena(char *arena, int index, int byte_size, char *result);
+void print_n_bytes_in_arena(char *arena, int index,
+    int byte_size, char *to_print);
