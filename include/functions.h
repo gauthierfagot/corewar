@@ -30,3 +30,4 @@ bool handle_wait(parameters_t *parameters, char *arena, head_t **heads);
 void start_fight(parameters_t *parameters, char *arena, head_t **heads);
 
 char *dec_to_bin(int nb);
+void extract_data_arena(char *arena, int index, int byte_size, char *result);

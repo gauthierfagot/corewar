@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include "op.h"
 #include "libmy.h"
+#include "arena.h"
 
 int bin_len(int nb)
 {
@@ -42,15 +43,15 @@ int search_byte_size(char *coding_byte, int *index)
         return 0;
     if (coding_byte[*index] == '0' && coding_byte[*index + 1] == '1') {
         *index = *index + 2;
-        return REG_SIZE;
+        return REG_SIZE_FILE;
     }
     if (coding_byte[*index] == '1' && coding_byte[*index + 1] == '0'){
         *index = *index + 2;
-        return DIR_SIZE;
+        return DIR_SIZE_FILE;
     }
     if (coding_byte[*index] == '1' && coding_byte[*index + 1] == '1') {
         *index = *index + 2;
-        return IND_SIZE;
+        return IND_SIZE_FILE;
     }
     return 0;
 }

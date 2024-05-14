@@ -11,6 +11,10 @@
 #include "op.h"
 #include "parameters.h"
 
+    #define IND_SIZE_FILE 2
+    #define DIR_SIZE_FILE 4
+    #define REG_SIZE_FILE 1
+
 typedef struct head_s {
     int number;
     char name[PROG_NAME_LENGTH + 1];
