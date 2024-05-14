@@ -14,7 +14,7 @@
 #include "op.h"
 #include "instructions.h"
 #include "mini_printf.h"
-
+#include <stdint.h>
 
 static int count_alive_champs(parameters_t *parameters)
 {
