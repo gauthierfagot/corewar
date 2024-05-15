@@ -13,7 +13,7 @@
 #include "instructions.h"
 #include "functions.h"
 
-static void add_result_in_arena(head_t *head, char *arena, int *result,
+static void add_result_in_arena(head_t *head, byte_t *arena, int *result,
     int *size_value)
 {
     unsigned char reg = 0;
@@ -28,7 +28,7 @@ static void add_result_in_arena(head_t *head, char *arena, int *result,
     head->carry = true;
 }
 
-static int get_second_value(head_t *head, char *arena, int *size_value,
+static int get_second_value(head_t *head, byte_t *arena, int *size_value,
     bool *error)
 {
     int value = 0;
@@ -50,7 +50,7 @@ static int get_second_value(head_t *head, char *arena, int *size_value,
     return value;
 }
 
-static int get_first_value(head_t *head, char *arena, int *size_value,
+static int get_first_value(head_t *head, byte_t *arena, int *size_value,
     bool *error)
 {
     int value = 0;
@@ -72,7 +72,7 @@ static int get_first_value(head_t *head, char *arena, int *size_value,
     return value;
 }
 
-static bool get_value_arena(head_t *head, char *arena, int *size_value,
+static bool get_value_arena(head_t *head, byte_t *arena, int *size_value,
     int value[2])
 {
     bool error = false;
@@ -86,7 +86,7 @@ static bool get_value_arena(head_t *head, char *arena, int *size_value,
     return true;
 }
 
-void instruction_and(head_t *head, char *arena, parameters_t *)
+void instruction_and(head_t *head, byte_t *arena, parameters_t *)
 {
     int value[2] = {0};
     int size_value[2] = {0};

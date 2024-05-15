@@ -10,7 +10,7 @@
 #include "mini_printf.h"
 #include "functions.h"
 
-void instruction_zjmp(head_t *head, char *arena, parameters_t *)
+void instruction_zjmp(head_t *head, byte_t *arena, parameters_t *)
 {
     __int16_t direct = 0;
 

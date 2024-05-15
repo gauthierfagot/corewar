@@ -12,24 +12,24 @@
 
 #define ASCII_SIZE 256
 
-void instruction_alive(head_t *, char *, parameters_t *);
-void instruction_load(head_t *, char *, parameters_t *);
-void instruction_st(head_t *, char *, parameters_t *);
-void instruction_add(head_t *, char *, parameters_t *);
-void instruction_sub(head_t *, char *, parameters_t *);
-void instruction_and(head_t *, char *, parameters_t *);
-void instruction_or(head_t *, char *, parameters_t *);
-void instruction_xor(head_t *, char *, parameters_t *);
-void instruction_zjmp(head_t *, char *, parameters_t *);
-void instruction_ldi(head_t *, char *, parameters_t *);
-void instruction_sti(head_t *, char *, parameters_t *);
-void instruction_fork(head_t *, char *, parameters_t *);
-void instruction_lld(head_t *, char *, parameters_t *);
-void instruction_lldi(head_t *, char *, parameters_t *);
-void instruction_lfork(head_t *, char *, parameters_t *);
-void instruction_aff(head_t *, char *, parameters_t *);
+void instruction_alive(head_t *, byte_t *, parameters_t *);
+void instruction_load(head_t *, byte_t *, parameters_t *);
+void instruction_st(head_t *, byte_t *, parameters_t *);
+void instruction_add(head_t *, byte_t *, parameters_t *);
+void instruction_sub(head_t *, byte_t *, parameters_t *);
+void instruction_and(head_t *, byte_t *, parameters_t *);
+void instruction_or(head_t *, byte_t *, parameters_t *);
+void instruction_xor(head_t *, byte_t *, parameters_t *);
+void instruction_zjmp(head_t *, byte_t *, parameters_t *);
+void instruction_ldi(head_t *, byte_t *, parameters_t *);
+void instruction_sti(head_t *, byte_t *, parameters_t *);
+void instruction_fork(head_t *, byte_t *, parameters_t *);
+void instruction_lld(head_t *, byte_t *, parameters_t *);
+void instruction_lldi(head_t *, byte_t *, parameters_t *);
+void instruction_lfork(head_t *, byte_t *, parameters_t *);
+void instruction_aff(head_t *, byte_t *, parameters_t *);
 
-static void (*INSTRUCTIONS[])(head_t *, char *, parameters_t *) = {
+static void (*INSTRUCTIONS[])(head_t *, byte_t *, parameters_t *) = {
     instruction_alive,
     instruction_load,
     instruction_st,

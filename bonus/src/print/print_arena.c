@@ -48,10 +48,10 @@ void print_arena(arena_t *arena)
     clear();
     for (int i = 0; i < MEM_SIZE; ++i) {
         if (colorize_heads(arena->heads, i)) {
-            print_exa(arena->arena[i]);
+            print_exa(arena->arena[i].byte);
             attroff(A_REVERSE);
         } else {
-            print_exa(arena->arena[i]);
+            print_exa(arena->arena[i].byte);
         }
         printw(" ");
         counter += 3;

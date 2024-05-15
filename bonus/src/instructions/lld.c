@@ -10,7 +10,7 @@
 #include "mini_printf.h"
 #include "functions.h"
 
-static bool put_dir_in_reg(head_t *head, char *arena)
+static bool put_dir_in_reg(head_t *head, byte_t *arena)
 {
     unsigned char reg = 0;
     int direct = 0;
@@ -26,7 +26,7 @@ static bool put_dir_in_reg(head_t *head, char *arena)
     return true;
 }
 
-static bool put_indir_in_reg(head_t *head, char *arena)
+static bool put_indir_in_reg(head_t *head, byte_t *arena)
 {
     unsigned char reg = 0;
     __int16_t indirect = 0;
@@ -45,9 +45,9 @@ static bool put_indir_in_reg(head_t *head, char *arena)
     return true;
 }
 
-void instruction_lld(head_t *head, char *arena, parameters_t *)
+void instruction_lld(head_t *head, byte_t *arena, parameters_t *)
 {
-    unsigned char coding_byte = arena[(head->index + 1) % MEM_SIZE];
+    unsigned char coding_byte = arena[(head->index + 1) % MEM_SIZE].byte;
     char binary_code[8] = {0};
     int tmp = 0;
 

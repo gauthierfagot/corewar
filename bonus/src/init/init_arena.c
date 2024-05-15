@@ -72,7 +72,7 @@ static bool extract_infos(FILE *file, champion_t *champion, head_t *tmp)
     return true;
 }
 
-static bool print_program_in_arena(char *arena, champion_t *champion,
+static bool print_program_in_arena(byte_t *arena, champion_t *champion,
     head_t **heads)
 {
     int address = champion->load_address;
@@ -89,14 +89,15 @@ static bool print_program_in_arena(char *arena, champion_t *champion,
     if (!extract_infos(file, champion, tmp))
         return false;
     for (int i = 0;
-        fread(arena + ((address + i) % MEM_SIZE), 1, 1, file) > 0; ++i);
+        fread(&((arena + ((address + i) % MEM_SIZE))->byte),
+        1, 1, file) > 0; ++i);
     fclose(file);
     init_base_infos(tmp, address, champion);
     push_front_head(heads, tmp);
     return true;
 }
 
-static head_t **init_heads(champion_t **champions, char *arena)
+static head_t **init_heads(champion_t **champions, byte_t *arena)
 {
     head_t **heads = malloc(sizeof(head_t *));
 
@@ -119,13 +120,14 @@ arena_t *init_arena(parameters_t *parameters)
 
     if (arena == NULL)
         return NULL;
-    arena->arena = malloc(MEM_SIZE);
+    arena->arena = malloc(sizeof(byte_t) * MEM_SIZE);
     if (arena->arena == NULL) {
         free(arena);
         return NULL;
     }
     for (int i = 0; i < MEM_SIZE; ++i) {
-        arena->arena[i] = 0;
+        arena->arena[i].byte = 0;
+        arena->arena[i].color = -1;
     }
     arena->heads = init_heads(parameters->champions, arena->arena);
     if (arena->heads == NULL) {

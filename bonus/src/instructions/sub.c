@@ -9,11 +9,11 @@
 #include "parameters.h"
 #include "mini_printf.h"
 
-void instruction_sub(head_t *head, char *arena, parameters_t *)
+void instruction_sub(head_t *head, byte_t *arena, parameters_t *)
 {
-    unsigned char first = arena[head->index + 2];
-    unsigned char second = arena[head->index + 3];
-    unsigned char result = arena[head->index + 4];
+    unsigned char first = arena[head->index + 2].byte;
+    unsigned char second = arena[head->index + 3].byte;
+    unsigned char result = arena[head->index + 4].byte;
 
     if ((first == 0 || second == 0 || result == 0) ||
         first > REG_NUMBER || second > REG_NUMBER || result > REG_NUMBER) {

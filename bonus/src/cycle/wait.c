@@ -10,7 +10,7 @@
 #include "parameters.h"
 #include "functions.h"
 
-bool handle_wait(parameters_t *parameters, char *arena, head_t **heads)
+bool handle_wait(parameters_t *parameters, byte_t *arena, head_t **heads)
 {
     if ((*heads)->wait_cycle > 0) {
         (*heads)->wait_cycle -= 1;

@@ -65,7 +65,8 @@ static void display_waiting_screen(void)
     if (logo == NULL)
         return;
     for (int i = 0; logo[i] != NULL; ++i)
-        mvprintw((LINES / 4) + i, (COLS - my_strlen(logo[i])) / 2, "%s\n", logo[i]);
+        mvprintw((LINES / 4) + i, (COLS - my_strlen(logo[i])) / 2,
+        "%s\n", logo[i]);
     mvprintw((LINES / 4) + my_arraylen(logo) + 5,
         (COLS - my_strlen(WAITING_MESSAGE)) / 2, "%s\n", WAITING_MESSAGE);
     refresh();

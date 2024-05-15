@@ -10,7 +10,7 @@
 #include "functions.h"
 #include "mini_printf.h"
 
-void instruction_alive(head_t *head, char *arena, parameters_t *parameters)
+void instruction_alive(head_t *head, byte_t *arena, parameters_t *parameters)
 {
     int direct = 0;
 
@@ -19,9 +19,6 @@ void instruction_alive(head_t *head, char *arena, parameters_t *parameters)
     head->index = (head->index + DIR_SIZE + 1) % MEM_SIZE;
     for (int i = 0; parameters->champions[i] != NULL; ++i) {
         if (parameters->champions[i]->number == direct) {
-            // mini_printf("The player %d (%s) is alive.\n",
-            //     parameters->champions[i]->number,
-            //     parameters->champions[i]->name);
             parameters->champions[i]->last_alive = 0;
         }
     }

@@ -32,7 +32,7 @@ static bool is_head_alive(parameters_t *parameters, head_t *head)
     return true;
 }
 
-void start_fight(parameters_t *parameters, char *arena, head_t **heads)
+void start_fight(parameters_t *parameters, byte_t *arena, head_t **heads)
 {
     if (*heads == NULL)
         return;
@@ -44,7 +44,7 @@ void start_fight(parameters_t *parameters, char *arena, head_t **heads)
     if (handle_wait(parameters, arena, heads))
         return;
     for (unsigned char i = 0; i < NB_OF_INSTRUCTIONS; i++) {
-        if (arena[(*heads)->index] == op_tab[i].code) {
+        if (arena[(*heads)->index].byte == op_tab[i].code) {
             (*heads)->wait_cycle = op_tab[i].nbr_cycles;
             (*heads)->instruction = INSTRUCTIONS[i];
             start_fight(parameters, arena, &(*heads)->next);

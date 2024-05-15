@@ -10,7 +10,7 @@
 #include "mini_printf.h"
 #include "functions.h"
 
-static bool load_index(head_t *head, char *arena, int *args)
+static bool load_index(head_t *head, byte_t *arena, int *args)
 {
     int first = 0;
     int second = 0;
@@ -33,7 +33,7 @@ static bool load_index(head_t *head, char *arena, int *args)
     return true;
 }
 
-void instruction_lldi(head_t *head, char *arena, parameters_t *)
+void instruction_lldi(head_t *head, byte_t *arena, parameters_t *)
 {
     int args[3] = {0};
 

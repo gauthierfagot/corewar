@@ -25,7 +25,7 @@ static head_t *duplicate_head(head_t *head)
     return new;
 }
 
-void instruction_lfork(head_t *head, char *arena, parameters_t *)
+void instruction_lfork(head_t *head, byte_t *arena, parameters_t *)
 {
     __int16_t direct = 0;
     head_t *duplicate = duplicate_head(head);
