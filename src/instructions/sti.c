@@ -50,11 +50,11 @@ void instruction_sti(head_t *head, char *arena, parameters_t *)
     extract_arguments_size(3, arena, head, args);
     if (args[0] != 1 || args[2] == 0 || args[2] == 0 || args[2] == 2) {
         head->carry = false;
-        args[1] = (args[1] == 1) ? 1 : 2;
-        args[2] = (args[2] == 1) ? 1 : 2;
+        args[1] = (args[1] == 4) ? 2 : args[1];
+        args[2] = (args[2] == 4) ? 2 : args[2];
     } else {
-        args[1] = (args[1] == 1) ? 1 : 2;
-        args[2] = (args[2] == 1) ? 1 : 2;
+        args[1] = (args[1] == 4) ? 2 : args[1];
+        args[2] = (args[2] == 4) ? 2 : args[2];
         if (!store_index(head, arena, args)) {
             head->carry = false;
         } else {

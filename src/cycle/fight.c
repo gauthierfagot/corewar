@@ -43,10 +43,10 @@ void start_fight(parameters_t *parameters, char *arena, head_t **heads)
     }
     if (handle_wait(parameters, arena, heads))
         return;
-    for (unsigned char i = 1; i <= NB_OF_INSTRUCTIONS; i++) {
-        if (arena[(*heads)->index] == i) {
-            (*heads)->wait_cycle = op_tab[i - 1].nbr_cycles;
-            (*heads)->instruction = INSTRUCTIONS[i - 1];
+    for (unsigned char i = 0; i < NB_OF_INSTRUCTIONS; i++) {
+        if (arena[(*heads)->index] == op_tab[i].code) {
+            (*heads)->wait_cycle = op_tab[i].nbr_cycles;
+            (*heads)->instruction = INSTRUCTIONS[i];
             start_fight(parameters, arena, &(*heads)->next);
             return;
         }
