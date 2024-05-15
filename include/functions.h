@@ -19,7 +19,7 @@ void print_help(void);
 parameters_t *get_parameters(char **argv);
 void free_parameters(parameters_t *params);
 void free_arena(arena_t *arena);
-void free_heads(head_t **heads);
+void free_heads(head_t **);
 bool set_champions_numbers(champion_t **champions);
 void init_champion_address(parameters_t *parameters);
 
