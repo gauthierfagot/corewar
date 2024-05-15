@@ -12,15 +12,12 @@
 #include "libmy.h"
 #include "arena.h"
 
-char *dec_to_bin(int nb)
+void dec_to_bin(int nb, char bin[8])
 {
-    char *bin = malloc(sizeof(char) * (8));
-
     for (int i = 0; i < 8; ++i) {
         bin[7 - i] = (nb % 2) + '0';
         nb = nb / 2;
     }
-    return bin;
 }
 
 void print_n_bytes_in_arena(char *arena, int index,
@@ -44,7 +41,7 @@ void extract_data_arena(char *arena, int index, int byte_size, char *result)
     }
 }
 
-int search_byte_size(char *coding_byte, int *index)
+int search_byte_size(char coding_byte[8], int *index)
 {
     if (*index >= (MAX_ARGS_NUMBER * 2)) {
         return 0;
@@ -67,12 +64,11 @@ int search_byte_size(char *coding_byte, int *index)
 void extract_arguments_size(int nb_of_args,
     char *arena, head_t *head, int *args)
 {
-    char *binary_code =
-        dec_to_bin((uint8_t)arena[(head->index + 1) % MEM_SIZE]);
+    char binary_code[8] = {0};
     int tmp = 0;
 
+    dec_to_bin((uint8_t)arena[(head->index + 1) % MEM_SIZE], binary_code);
     for (int i = 0; i < nb_of_args; ++i) {
         args[i] = search_byte_size(binary_code, &tmp);
     }
-    free(binary_code);
 }

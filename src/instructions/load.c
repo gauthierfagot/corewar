@@ -48,9 +48,10 @@ static bool put_indir_in_reg(head_t *head, char *arena)
 void instruction_load(head_t *head, char *arena, parameters_t *)
 {
     unsigned char coding_byte = arena[(head->index + 1) % MEM_SIZE];
-    char *binary_code = dec_to_bin(coding_byte);
+    char binary_code[8] = {0};
     int tmp = 0;
 
+    dec_to_bin(coding_byte, binary_code);
     if (search_byte_size(binary_code, &tmp) == DIR_SIZE_FILE) {
         if (!put_dir_in_reg(head, arena))
             head->carry = false;
@@ -64,5 +65,4 @@ void instruction_load(head_t *head, char *arena, parameters_t *)
             head->carry = true;
         head->index = (head->index + 5) % MEM_SIZE;
     }
-    free(binary_code);
 }

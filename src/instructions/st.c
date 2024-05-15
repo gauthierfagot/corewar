@@ -37,9 +37,10 @@ static void print_value(head_t *head, char *arena)
 void instruction_st(head_t *head, char *arena, parameters_t *)
 {
     unsigned char coding_byte = arena[head->index + 1];
-    char *binary_code = dec_to_bin(coding_byte);
+    char binary_code[8] = {0};
     int tmp = 0;
 
+    dec_to_bin(coding_byte, binary_code);
     search_byte_size(binary_code, &tmp);
     if (search_byte_size(binary_code, &tmp) == DIR_SIZE_FILE) {
         print_value(head, arena);
@@ -48,5 +49,4 @@ void instruction_st(head_t *head, char *arena, parameters_t *)
         store_register(head, arena);
         head->index = (head->index + 4) % MEM_SIZE;
     }
-    free(binary_code);
 }

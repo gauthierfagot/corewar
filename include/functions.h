@@ -30,11 +30,10 @@ void push_index_head(head_t *head, head_t *to_push);
 bool handle_wait(parameters_t *parameters, char *arena, head_t **heads);
 void start_fight(parameters_t *parameters, char *arena, head_t **heads);
 
-char *dec_to_bin(int nb);
-int search_byte_size(char *coding_byte, int *index);
+void dec_to_bin(int nb, char bin[8]);
+int search_byte_size(char coding_byte[8], int *index);
 void extract_data_arena(char *arena, int index, int byte_size, char *result);
 void print_n_bytes_in_arena(char *arena, int index,
     int byte_size, char *to_print);
 void extract_arguments_size(int nb_of_args,
     char *arena, head_t *head, int *args);
-void free_heads(head_t **heads);

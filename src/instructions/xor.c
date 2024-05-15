@@ -13,11 +13,12 @@
 #include "functions.h"
 
 static void add_result_in_arena(head_t *head, char *arena, int *result,
-    int index)
+    int *size_value)
 {
     unsigned char reg = 0;
 
-    extract_data_arena(arena, index, REG_SIZE_FILE, (char *)&reg);
+    extract_data_arena(arena, (head->index + 2 + size_value[0] +
+        size_value[1]) % MEM_SIZE, REG_SIZE_FILE, (char *)&reg);
     if (reg == 0 || reg > REG_NUMBER) {
         head->carry = false;
         return;
@@ -26,18 +27,21 @@ static void add_result_in_arena(head_t *head, char *arena, int *result,
     head->carry = true;
 }
 
-static int get_value_arena(head_t *head, char *arena, int byte_size,
-    int index)
+static int get_first_value(head_t *head, char *arena, int *size_value,
+    bool *error)
 {
     int value = 0;
 
-    extract_data_arena(arena, index, byte_size, (char *)&value);
-    if (byte_size == REG_SIZE_FILE) {
-        if (value <= 0 || value > REG_NUMBER)
+    extract_data_arena(arena, (head->index + 2)
+        % MEM_SIZE, size_value[0], (char *)&value);
+    if (size_value[0] == REG_SIZE_FILE) {
+        if (value <= 0 || value > REG_NUMBER) {
+            *error = true;
             return 0;
+        }
         return head->registers[value - 1];
     }
-    if (byte_size == IND_SIZE_FILE) {
+    if (size_value[0] == IND_SIZE_FILE) {
         extract_data_arena(arena, (head->index + value % IDX_MOD) % MEM_SIZE,
             DIR_SIZE_FILE, (char *)&value);
         return value;
@@ -45,26 +49,54 @@ static int get_value_arena(head_t *head, char *arena, int byte_size,
     return value;
 }
 
+static int get_second_value(head_t *head, char *arena, int *size_value,
+    bool *error)
+{
+    int value = 0;
+
+    extract_data_arena(arena, (head->index + 2 + size_value[0])
+        % MEM_SIZE, size_value[1], (char *)&value);
+    if (size_value[1] == REG_SIZE_FILE) {
+        if (value <= 0 || value > REG_NUMBER) {
+            *error = true;
+            return 0;
+        }
+        return head->registers[value - 1];
+    }
+    if (size_value[1] == IND_SIZE_FILE) {
+        extract_data_arena(arena, (head->index + value % IDX_MOD) % MEM_SIZE,
+            DIR_SIZE_FILE, (char *)&value);
+        return value;
+    }
+    return value;
+}
+
+static bool get_value_arena(head_t *head, char *arena, int *size_value,
+    int value[2])
+{
+    bool error = false;
+
+    value[0] = get_first_value(head, arena, size_value, &error);
+    if (error)
+        return false;
+    value[1] = get_second_value(head, arena, size_value, &error);
+    if (error)
+        return false;
+    return true;
+}
+
 void instruction_xor(head_t *head, char *arena, parameters_t *)
 {
-    char *coding_byte = NULL;
-    int tmp = 0;
-    int byte_size = 0;
-    int index = 0;
     int value[2] = {0};
+    int size_value[2] = {0};
 
-    index = (head->index + 2) % MEM_SIZE;
-    coding_byte = dec_to_bin((unsigned char)arena[index - 1]);
-    if (coding_byte == NULL) {
+    extract_arguments_size(2, arena, head, size_value);
+    if (!get_value_arena(head, arena, size_value, value)) {
         head->carry = false;
+        head->index = (head->index + 3 + size_value[0] + size_value[1])
+        % MEM_SIZE;
         return;
     }
-    for (int i = 0; i < 2; ++i) {
-        byte_size = search_byte_size(coding_byte, &tmp);
-        value[i] = get_value_arena(head, arena, byte_size, index);
-        index += byte_size;
-    }
-    add_result_in_arena(head, arena, value, index);
-    head->index = (index + 1) % MEM_SIZE;
-    free(coding_byte);
+    add_result_in_arena(head, arena, value, size_value);
+    head->index = (head->index + 3 + size_value[0] + size_value[1]) % MEM_SIZE;
 }
