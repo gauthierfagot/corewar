@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "arena.h"
 
-static void free_heads(head_t **heads)
+void free_heads(head_t **heads)
 {
     if (*heads == NULL)
         return;

@@ -37,3 +37,4 @@ void print_n_bytes_in_arena(char *arena, int index,
     int byte_size, char *to_print);
 void extract_arguments_size(int nb_of_args,
     char *arena, head_t *head, int *args);
+void free_heads(head_t **heads);

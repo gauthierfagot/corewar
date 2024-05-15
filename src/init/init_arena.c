@@ -55,19 +55,38 @@ static void init_base_infos(head_t *tmp, int address, champion_t *champion)
     tmp->carry = true;
 }
 
+static bool extract_infos(FILE *file, champion_t *champion, head_t *tmp)
+{
+    if (file == NULL) {
+        my_puterr(champion->path);
+        my_puterr(": no such file or directory.\n");
+        free(tmp);
+        fclose(file);
+        return false;
+    }
+    if (!extract_header(&file, champion)) {
+        free(tmp);
+        fclose(file);
+        return false;
+    }
+    return true;
+}
+
 static bool print_program_in_arena(char *arena, champion_t *champion,
     head_t **heads)
 {
     int address = champion->load_address;
     FILE *file = fopen(champion->path, "r");
-    head_t *tmp = malloc(sizeof(head_t));
+    head_t *tmp = NULL;
 
-    if (file == NULL) {
-        my_puterr(champion->path);
-        my_puterr(": no such file or directory.\n");
+    if (file == NULL)
+        return false;
+    tmp = malloc(sizeof(head_t));
+    if (tmp == NULL) {
+        fclose(file);
         return false;
     }
-    if (!extract_header(&file, champion))
+    if (!extract_infos(file, champion, tmp))
         return false;
     for (int i = 0;
         fread(arena + ((address + i) % MEM_SIZE), 1, 1, file) > 0; ++i);
@@ -86,6 +105,8 @@ static head_t **init_heads(champion_t **champions, char *arena)
     *heads = NULL;
     for (int i = 0; champions[i]; ++i) {
         if (!print_program_in_arena(arena, champions[i], heads)) {
+            free_heads(heads);
+            free(heads);
             return NULL;
         }
     }

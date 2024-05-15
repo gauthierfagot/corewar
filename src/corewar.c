@@ -56,9 +56,8 @@ static bool launch_arena(parameters_t *parameters)
     if (arena == NULL)
         return false;
     for (int i = 0; count_alive_champs(parameters) > 1; i++) {
-        if (parameters->dump == i) {
+        if (parameters->dump == i)
             print_arena(arena);
-        }
         start_fight(parameters, arena->arena, arena->heads);
         update_lives(parameters);
     }
@@ -67,7 +66,6 @@ static bool launch_arena(parameters_t *parameters)
     else
         mini_printf("Everybody is dead... :(\n");
     free_arena(arena);
-    free_parameters(parameters);
     return true;
 }
 
@@ -78,7 +76,10 @@ int corewar(char **argv)
     if (parameters == NULL)
         return ERROR;
     init_champion_address(parameters);
-    if (!launch_arena(parameters))
+    if (!launch_arena(parameters)) {
+        free_parameters(parameters);
         return ERROR;
+    }
+    free_parameters(parameters);
     return SUCCESS;
 }
