@@ -21,10 +21,11 @@ void dec_to_bin(int nb, char bin[8])
 }
 
 void print_n_bytes_in_arena(byte_t *arena, int index,
-    int byte_size, char *to_print)
+    int byte_size, char *to_print, int color)
 {
     for (int i = 0; i < byte_size; i++) {
         arena[(index + i) % MEM_SIZE].byte = to_print[byte_size - 1 - i];
+        arena[(index + i) % MEM_SIZE].color = color;
     }
 }
 

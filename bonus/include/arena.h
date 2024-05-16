@@ -29,6 +29,7 @@ typedef struct head_s {
     void (*instruction)(struct head_s *, byte_t *, parameters_t *);
     bool carry;
     int registers[REG_NUMBER];
+    int color;
     struct head_s *next;
 }head_t;
 

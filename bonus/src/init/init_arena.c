@@ -44,7 +44,8 @@ static bool extract_header(FILE **file, champion_t *champion)
     return true;
 }
 
-static void init_base_infos(head_t *tmp, int address, champion_t *champion)
+static void init_base_infos(head_t *tmp, int address,
+    champion_t *champion, int color)
 {
     tmp->index = address;
     tmp->number = champion->number;
@@ -53,6 +54,7 @@ static void init_base_infos(head_t *tmp, int address, champion_t *champion)
         tmp->registers[i] = 0;
     tmp->registers[0] = champion->number;
     tmp->carry = true;
+    tmp->color = color;
 }
 
 static bool extract_infos(FILE *file, champion_t *champion, head_t *tmp)
@@ -73,7 +75,7 @@ static bool extract_infos(FILE *file, champion_t *champion, head_t *tmp)
 }
 
 static bool print_program_in_arena(byte_t *arena, champion_t *champion,
-    head_t **heads)
+    head_t **heads, int j)
 {
     int address = champion->load_address;
     FILE *file = fopen(champion->path, "r");
@@ -90,9 +92,11 @@ static bool print_program_in_arena(byte_t *arena, champion_t *champion,
         return false;
     for (int i = 0;
         fread(&((arena + ((address + i) % MEM_SIZE))->byte),
-        1, 1, file) > 0; ++i);
+        1, 1, file) > 0; ++i)
+        (arena + ((address + i) % MEM_SIZE))->color = (j % 4) + 1;
     fclose(file);
-    init_base_infos(tmp, address, champion);
+    init_base_infos(tmp, address, champion, (j % 4) + 1);
+    champion->color = (j % 4) + 1;
     push_front_head(heads, tmp);
     return true;
 }
@@ -105,7 +109,7 @@ static head_t **init_heads(champion_t **champions, byte_t *arena)
         return NULL;
     *heads = NULL;
     for (int i = 0; champions[i]; ++i) {
-        if (!print_program_in_arena(arena, champions[i], heads)) {
+        if (!print_program_in_arena(arena, champions[i], heads, i)) {
             free_heads(heads);
             free(heads);
             return NULL;

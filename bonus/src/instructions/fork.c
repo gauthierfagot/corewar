@@ -22,6 +22,7 @@ static head_t *duplicate_head(head_t *head)
     for (int i = 0; i < REG_NUMBER; ++i)
         new->registers[i] = head->registers[i];
     new->wait_cycle = -1;
+    new->color = head->color;
     return new;
 }
 

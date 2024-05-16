@@ -31,7 +31,7 @@ static void print_value(head_t *head, byte_t *arena)
         return;
     extract_data_arena(arena, head->index + 3, 4, (char *)&direct);
     print_n_bytes_in_arena(arena, head->index + direct % IDX_MOD, 4,
-        (char *)&head->registers[first - 1]);
+        (char *)&head->registers[first - 1], head->color);
 }
 
 void instruction_st(head_t *head, byte_t *arena, parameters_t *)

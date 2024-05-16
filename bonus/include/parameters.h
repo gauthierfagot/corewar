@@ -18,6 +18,7 @@ typedef struct champion_s {
     char *path;
     int last_alive;
     bool alive;
+    int color;
 }champion_t;
 
 typedef struct parameters_s {

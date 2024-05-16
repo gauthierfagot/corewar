@@ -64,14 +64,34 @@ static void display_waiting_screen(void)
     free(buffer);
     if (logo == NULL)
         return;
+    attron(COLOR_PAIR(6));
     for (int i = 0; logo[i] != NULL; ++i)
         mvprintw((LINES / 4) + i, (COLS - my_strlen(logo[i])) / 2,
         "%s\n", logo[i]);
+    attroff(COLOR_PAIR(6));
     mvprintw((LINES / 4) + my_arraylen(logo) + 5,
         (COLS - my_strlen(WAITING_MESSAGE)) / 2, "%s\n", WAITING_MESSAGE);
     refresh();
     getch();
     free_array(logo);
+}
+
+static bool set_window_parameters()
+{
+    curs_set(0);
+    if (!has_colors()) {
+        mini_printf("your terminal doesn't support colors\n");
+        return false;
+    }
+    if (start_color() == ERR)
+        return false;
+    init_pair(1, COLOR_WHITE, COLOR_BLUE);
+    init_pair(2, COLOR_BLACK, COLOR_RED);
+    init_pair(3, COLOR_WHITE, COLOR_GREEN);
+    init_pair(4, COLOR_BLACK, COLOR_YELLOW);
+    init_pair(5, COLOR_BLACK, COLOR_WHITE);
+    init_pair(6, COLOR_RED, 0);
+    return true;
 }
 
 static bool launch_arena(parameters_t *parameters)
@@ -81,13 +101,19 @@ static bool launch_arena(parameters_t *parameters)
     if (arena == NULL)
         return false;
     initscr();
-    curs_set(0);
+    if (!set_window_parameters()) {
+        free_arena(arena);
+        return false;
+    }
     display_waiting_screen();
+    timeout(0);
     for (int i = 0; count_alive_champs(parameters) > 1; i++) {
-        print_arena(arena);
         start_fight(parameters, arena->arena, arena->heads);
         update_lives(parameters);
-        usleep(10000);
+        if ((i + 1) % parameters->dump == 0)
+            print_arena(arena, parameters, i);
+        if (getch() == 'q')
+            break;
     }
     endwin();
     if (*arena->heads != NULL)

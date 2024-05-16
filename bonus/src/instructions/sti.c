@@ -39,7 +39,7 @@ static bool store_index(head_t *head, byte_t *arena, int *args)
     second = (args[1] == 1) ? head->registers[second - 1] : second;
     third = (args[2] == 1) ? head->registers[third - 1] : third;
     print_n_bytes_in_arena(arena, (head->index +
-        (second + third) % IDX_MOD) % MEM_SIZE, 4, (char *)&first);
+        (second + third) % IDX_MOD) % MEM_SIZE, 4, (char *)&first, head->color);
     return true;
 }
 

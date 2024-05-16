@@ -24,7 +24,7 @@ bool set_champions_numbers(champion_t **champions);
 void init_champion_address(parameters_t *parameters);
 
 arena_t *init_arena(parameters_t *);
-void print_arena(arena_t *);
+void print_arena(arena_t *, parameters_t *, int);
 
 void push_front_head(head_t **list, head_t *to_push);
 void push_index_head(head_t *head, head_t *to_push);
@@ -35,6 +35,6 @@ void dec_to_bin(int nb, char bin[8]);
 int search_byte_size(char coding_byte[8], int *index);
 void extract_data_arena(byte_t *arena, int index, int byte_size, char *result);
 void print_n_bytes_in_arena(byte_t *arena, int index,
-    int byte_size, char *to_print);
+    int byte_size, char *to_print, int color);
 void extract_arguments_size(int nb_of_args,
     byte_t *arena, head_t *head, int *args);
