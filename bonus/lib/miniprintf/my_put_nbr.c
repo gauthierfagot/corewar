@@ -35,7 +35,7 @@ int my_put_nbr(int nb)
     if (nb < 0) {
         my_putchar('-');
         if (nb == -2147483648) {
-            nb = (nb + 1)* (-1);
+            nb = (nb + 1) * (-1);
             a = 1;
         } else {
         nb = nb * (-1);

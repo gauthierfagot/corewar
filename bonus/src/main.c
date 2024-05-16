@@ -13,7 +13,7 @@
 static int load_music(SDL_AudioSpec *wavSpec, Uint32 *wavLength,
     Uint8 **wavBuffer, SDL_AudioDeviceID *deviceId)
 {
-    if (SDL_LoadWAV("./assets/tf_nemesis.wav", wavSpec,
+    if (SDL_LoadWAV(MUSIC_PATH, wavSpec,
     wavBuffer, wavLength) == NULL)
     {
         fprintf(stderr, "Could not load sound file: %s\n", SDL_GetError());

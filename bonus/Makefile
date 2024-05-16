@@ -65,7 +65,7 @@ TEST_FLAGS	=	--coverage
 
 LDFLAGS =	-L./lib
 
-LDLIB	=	-lmy -lmini -lncurses -lSDL2
+LDLIB	=	-lmy -lmini -lncurses -lSDL2 -lm
 
 TEST_LIB	=	-lcriterion
 
