@@ -93,7 +93,6 @@ static void print_champions_name(parameters_t *parameters, int line, int cycles)
 
 void print_arena(arena_t *arena, parameters_t *parameters, int cycles)
 {
-    int counter = 0;
     int line = 2;
 
     clear();
@@ -112,7 +111,6 @@ void print_arena(arena_t *arena, parameters_t *parameters, int cycles)
         if ((i + 1) % 128 == 0) {
             printw("\n");
             line += 1;
-            counter = 0;
         } else
             printw(" ");
     }

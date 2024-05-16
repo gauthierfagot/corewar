@@ -25,8 +25,7 @@ static int load_music(SDL_AudioSpec *wavSpec, Uint32 *wavLength,
         fprintf(stderr, "Failed to open audio: %s\n", SDL_GetError());
         return ERROR;
     }
-    int success = SDL_QueueAudio(*deviceId, *wavBuffer, *wavLength);
-    if (success < 0)
+    if (SDL_QueueAudio(*deviceId, *wavBuffer, *wavLength) < 0)
     {
         fprintf(stderr, "Failed to queue audio: %s\n", SDL_GetError());
         return ERROR;
