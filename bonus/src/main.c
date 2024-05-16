@@ -13,7 +13,7 @@
 static int load_music(SDL_AudioSpec *wavSpec, Uint32 *wavLength,
     Uint8 **wavBuffer, SDL_AudioDeviceID *deviceId)
 {
-    if (SDL_LoadWAV("./assets/tf_nemesis.wav", wavSpec,
+    if (SDL_LoadWAV("./assets/music.wav", wavSpec,
     wavBuffer, wavLength) == NULL)
     {
         fprintf(stderr, "Could not load sound file: %s\n", SDL_GetError());
@@ -25,8 +25,7 @@ static int load_music(SDL_AudioSpec *wavSpec, Uint32 *wavLength,
         fprintf(stderr, "Failed to open audio: %s\n", SDL_GetError());
         return ERROR;
     }
-    int success = SDL_QueueAudio(*deviceId, *wavBuffer, *wavLength);
-    if (success < 0)
+    if (SDL_QueueAudio(*deviceId, *wavBuffer, *wavLength) < 0)
     {
         fprintf(stderr, "Failed to queue audio: %s\n", SDL_GetError());
         return ERROR;
