@@ -81,10 +81,10 @@ static void find_address(parameters_t *parameters, int i)
 
 static void init_all_address(champion_t **champions, int nb_champions)
 {
-    int address = MEM_SIZE / (nb_champions + 1);
+    int address = MEM_SIZE / (nb_champions);
 
     for (int i = 0; i < nb_champions; ++i)
-        champions[i]->load_address = address * (i + 1);
+        champions[i]->load_address = address * i;
 }
 
 void init_champion_address(parameters_t *parameters)
