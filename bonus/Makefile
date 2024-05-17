@@ -79,7 +79,7 @@ NAME	=	corewar
 
 TEST_NAME	=	unit_tests
 
-all:	$(NAME)
+all:	build_lib $(NAME)
 
 build_lib:
 	make -C	lib/my
@@ -93,7 +93,7 @@ fclean_lib:
 	make fclean -C lib/my
 	make fclean -C lib/miniprintf
 
-$(NAME):	build_lib $(OBJ)
+$(NAME):	$(OBJ)
 	$(CC) -o $(NAME) $(OBJ) $(LDFLAGS) $(LDLIB)
 
 clean: clean_lib

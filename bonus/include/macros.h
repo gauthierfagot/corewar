@@ -13,4 +13,4 @@ static const int ERROR = 84;
 static char const HELP_FILE[] = "./assets/help.txt";
 static char const WAITING_SCREEN[] = "./assets/waiting.txt";
 static char const WAITING_MESSAGE[] = "PRESS ANY KEY TO START";
-static char const MUSIC_PATH[] = "./assets/music.wav";
+static char const MUSIC_PATH[] = "./assets/music2.wav";

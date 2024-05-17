@@ -114,6 +114,7 @@ static bool launch_arena(parameters_t *parameters)
             print_arena(arena, parameters, i);
         if (getch() == 'q')
             break;
+        getch();
     }
     endwin();
     if (*arena->heads != NULL)

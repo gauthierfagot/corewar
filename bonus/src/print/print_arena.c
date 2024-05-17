@@ -13,23 +13,23 @@
 #include "op.h"
 #include "libmy.h"
 
-static void put_exa_didgit(int i)
+static void put_exa_didgit(int i, int line, int cols)
 {
     if (i < 10) {
-        printw("%d", i);
+        mvprintw(line, ((COLS - (128 * 3)) / 2) + cols, "%d", i);
     } else {
-        printw("%c", 'a' + (i - 10));
+        mvprintw(line, ((COLS - (128 * 3)) / 2) + cols, "%c", 'a' + (i - 10));
     }
 }
 
-static void print_exa(unsigned char number)
+static void print_exa(unsigned char number, int line, int cols)
 {
     if (number == 0) {
-        printw("..");
+        mvprintw(line, ((COLS - (128 * 3)) / 2) + cols, "..");
         return;
     }
-    put_exa_didgit(number / 16);
-    put_exa_didgit(number % 16);
+    put_exa_didgit(number / 16, line, cols);
+    put_exa_didgit(number % 16, line, cols + 1);
 }
 
 static bool colorize_heads(head_t **heads, int index)
@@ -93,27 +93,30 @@ static void print_champions_name(parameters_t *parameters, int line, int cycles)
 
 void print_arena(arena_t *arena, parameters_t *parameters, int cycles)
 {
-    int line = 2;
+    int line = 0;
+    int cols = 0;
 
     clear();
     for (int i = 0; i < MEM_SIZE; ++i) {
         if (colorize_heads(arena->heads, i)) {
-            print_exa(arena->arena[i].byte);
+            print_exa(arena->arena[i].byte, line, cols);
             attroff(COLOR_PAIR(5));
         } else {
             if (arena->arena[i].color != -1) {
                 attron(COLOR_PAIR(arena->arena[i].color));
-                print_exa(arena->arena[i].byte);
+                print_exa(arena->arena[i].byte, line, cols);
                 attroff(COLOR_PAIR(arena->arena[i].color));
             } else
-                print_exa(arena->arena[i].byte);
+                print_exa(arena->arena[i].byte, line, cols);
         }
         if ((i + 1) % 128 == 0) {
-            printw("\n");
             line += 1;
-        } else
-            printw(" ");
+            cols = 0;
+        } else {
+            cols += 3;
+        }
     }
+    line += 2;
     print_champions_name(parameters, line, cycles);
     refresh();
 }
