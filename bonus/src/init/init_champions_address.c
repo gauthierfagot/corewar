@@ -92,6 +92,8 @@ void init_champion_address(parameters_t *parameters)
     int champ_with_address = 0;
     int i = 0;
 
+    if (parameters->champions[0] == NULL)
+        return;
     while (parameters->champions[i] != NULL) {
         if (parameters->champions[i]->load_address != -1) {
             parameters->champions[i]->load_address %= MEM_SIZE;
