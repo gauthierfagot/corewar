@@ -13,7 +13,7 @@ Here is the best project of the paris 2028 promotion 💪.
 
 ## Getting Started
 
-To get started, just ```make && ./corewar robot1 robot2``` in the first terminal \
+To get started, just ```make && ./corewar robot1 robot2``` in the terminal \
 if you want a better interface go to ```bonus``` folder and make the same thing.
 
 
